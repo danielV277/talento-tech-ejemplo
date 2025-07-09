@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Formulario</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="card">
+    <h1>Formulario</h1>
+    <form id="formulario">
+      <div class="form-group">
+        <label for="nombre">Nombre:</label>
+        <input type="text" name="nombre" id="nombre" required />
+      </div>
+
+      <div class="form-group">
+        <label for="apellidos">Apellido:</label>
+        <input type="text" name="apellidos" id="apellidos" required />
+      </div>
+      
+      <!-- <div class="form-group">
+        <label for="foto">Foto:</label>
+        <input type="file" name="foto" id="foto" />
+      </div> -->
+
+      <div class="form-group">
+        <button type="submit">Enviar</button>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    const form = document.getElementById('formulario');
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const formData = new FormData(form);
+
+        console.log(formData)
+        try{
+            const response = await fetch('http://localhost:3000/api/personas/nuevo',{
+                method: 'POST',
+                body: formData
+            });
+
+            if(!response.ok){
+                throw new Error(`Error en la solicitud: ${response.status}`);
+            }
+
+            const data = await response.json();
+
+            alert('Datos enviados con exito' + JSON.stringify(data));
+        }catch(error){
+            alert('Error al mandar los datos: ' + error.message );
+        }
+    })
+  </script>
+</body>
+</html>
