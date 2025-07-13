@@ -1,5 +1,8 @@
 import { Router } from "express";
 import pool from "../config/db.js";
+import multer from "multer";
+
+const upload = multer();
 
 const router = Router();
 
@@ -14,9 +17,7 @@ router.get('/consultar', async (req,res) => {
     
 });
 
-
-
-router.post('/nuevo', async (req, res) => {
+router.post('/nuevo', upload.none() ,async (req, res) => {
 
     const { nombre, apellidos } = req.body;
 

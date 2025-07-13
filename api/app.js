@@ -10,12 +10,11 @@ const upload = multer();
 app.use(cors())
 app.use(express.json())
 
-app.use('/api/personas',personasRoutes);
-
 app.get('/api', (req, res) => {
-    res.json({mensaje: 'API OK'})
+  res.json({mensaje: 'API OK'})
 })
 
+app.use('/api/personas',personasRoutes);
 
 const testDBConnection = async () => {
     try {
