@@ -2,10 +2,9 @@ import express from 'express';
 import cors from 'cors';
 import personasRoutes from './routes/personas.js';
 import pool from './config/db.js';
-import multer from 'multer';
+
 
 const app = express()
-const upload = multer();
 
 app.use(cors())
 app.use(express.json())

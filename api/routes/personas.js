@@ -1,8 +1,7 @@
 import { Router } from "express";
 import pool from "../config/db.js";
-import multer from "multer";
 
-const upload = multer();
+import upload from "../config/multer.js";
 
 const router = Router();
 
@@ -17,14 +16,22 @@ router.get('/consultar', async (req,res) => {
     
 });
 
-router.post('/nuevo', upload.none() ,async (req, res) => {
+
+// Cambiar a upload.single('foto') para recibir una foto
+router.post('/nuevo', upload.single('foto'), async (req, res) => {
+
 
     const { nombre, apellidos } = req.body;
+    // Guardar la URL de la foto subida a S3
+    const urlfoto = req.file ? req.file.location : null;
 
     try{
+
+
+        // Guardar la URL de la foto en la columna urlfoto
         const result = await pool.query(
-            'INSERT INTO Personas (nombre, apellidos) VALUES ($1, $2) RETURNING *',
-            [nombre,apellidos]);
+            'INSERT INTO Personas (nombre, apellidos, urlfoto) VALUES ($1, $2, $3) RETURNING *',
+            [nombre, apellidos, urlfoto]);
 
         res.status(201).json(result.rows[0])
     } catch (error) {
