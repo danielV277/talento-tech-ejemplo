@@ -4,7 +4,7 @@ const { Pool } = pg
 
 console.log("Conectando con:");
 console.log("  host:", process.env.HOST);
-console.log("  user:", process.env.USER);
+console.log("  user:", process.env.USERDB);
 console.log("  database:", process.env.DATABASE);
 console.log("  password:", process.env.PASSWORD);
 console.log("  port:", process.env.PORT);
@@ -12,7 +12,7 @@ console.log("  port:", process.env.PORT);
 
 const pool = new Pool({
     host: process.env.HOST,
-    user: process.env.USER,
+    user: process.env.USERDB,
     database: process.env.DATABASE,
     password: process.env.PASSWORD,
     port: Number(process.env.PORT),
