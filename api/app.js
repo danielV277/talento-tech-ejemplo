@@ -20,6 +20,7 @@ const testDBConnection = async () => {
       await pool.query('SELECT 1');
       console.log('✅ Conectado exitosamente a la base de datos PostgreSQL');
     } catch (error) {
+      console.log(`usuario: ${process.env.USER}, base de datos: ${process.env.DATABASE}, host: ${process.env.HOST}`);
       console.error('❌ Error al conectar con la base de datos:', error.message);
       process.exit(1); // Opcional: salir si no se puede conectar
     }
