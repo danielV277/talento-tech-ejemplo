@@ -18,6 +18,7 @@ app.use('/api/personas',personasRoutes);
 const testDBConnection = async () => {
     try {
       await pool.query('SELECT 1');
+      console.log(`usuario: ${process.env.USER}, base de datos: ${process.env.DATABASE}, host: ${process.env.HOST}`);
       console.log('✅ Conectado exitosamente a la base de datos PostgreSQL');
     } catch (error) {
       console.log(`usuario: ${process.env.USER}, base de datos: ${process.env.DATABASE}, host: ${process.env.HOST}`);
