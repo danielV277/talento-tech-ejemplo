@@ -43,7 +43,7 @@
     async function cargarPersonas() {
       personasList.innerHTML = '<li>Cargando...</li>';
       try {
-        const response = await fetch('http://52.23.195.153:3000/api/personas/consultar');
+        const response = await fetch('http://54.173.58.205:3000/api/personas/consultar');
         const personas = await response.json();
         personasList.innerHTML = '';
         if (personas.length === 0) {
@@ -68,7 +68,7 @@
       e.preventDefault();
       const formData = new FormData(form);
       try {
-        const response = await fetch('http://52.23.195.153:3000/api/personas/nuevo', {
+        const response = await fetch('http://54.173.58.205:3000/api/personas/nuevo', {
           method: 'POST',
           body: formData
         });
